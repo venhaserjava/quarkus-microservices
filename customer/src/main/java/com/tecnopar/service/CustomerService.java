@@ -16,6 +16,8 @@ public class CustomerService {
 
     @Inject
     private CustomerRepository customerRepository;
+    private Long id;
+    private CustomerDTO dto;
 
     public List<CustomerDTO> findAll() {
         List<CustomerDTO> customers = new ArrayList<>();
@@ -31,6 +33,8 @@ public class CustomerService {
         return customer;
     }
     public CustomerDTO update(Long id, CustomerDTO dto) {
+        this.id = id;
+        this.dto = dto;
         var ent = findById(id);
         if (ent.getId().equals(id)) {
             ent.setAddress(dto.getAddress());

@@ -31,7 +31,7 @@ public class CustomerController {
         }
     }
     @GET
-    @Path("/{id")
+    @Path("/{id}")
     public Response getById(@PathParam("id") Long id){
         try {
             return Response.ok(customerService.getById(id)).build();
@@ -50,17 +50,20 @@ public class CustomerController {
     }
     @PUT
     @Transactional
-    @Path("/{id")
+    @Path("/{id}")
     public Response update(@PathParam("id") Long id, CustomerDTO dto) {
         try {
-            return Response.accepted(customerService.update(id,dto)).build();
+//            return Response.accepted(customerService.update(id,dto)).build();
+            customerService.update(id,dto);
+            return Response.accepted().build();
         } catch (Exception e) {
+            e.printStackTrace();
             return Response.serverError().build();
         }
     }
     @DELETE
     @Transactional
-    @Path("/{id")
+    @Path("/{id}")
     public Response delete(@PathParam("id") Long id) {
         try {
             customerService.delete(id);
