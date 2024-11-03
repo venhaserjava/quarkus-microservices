@@ -48,13 +48,17 @@ public class CustomerService {
             customerRepository.deleteById(id);
         }
     }
-
-    public CustomerEntity findById(Long id){
+    public CustomerDTO getById(Long id) {
+        return  mapToDTO(findById(id));
+    }
+    ////////////////////////////////////////////////////////////////////////////////////
+    // private methods
+    /////////////////////////////////////////////////////////////////////////////////////
+    private CustomerEntity findById(Long id){
         return (CustomerEntity) customerRepository.findByIdOptional(id)
                 .orElseThrow(CustomerNotFoundException::new);
     }
-
-    public CustomerDTO mapToDTO(CustomerEntity ent){
+    private CustomerDTO mapToDTO(CustomerEntity ent){
         CustomerDTO dto = new CustomerDTO();
         dto.setAddress(ent.getAddress());
         dto.setAge(ent.getAge());

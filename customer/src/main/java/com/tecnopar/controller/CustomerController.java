@@ -34,7 +34,7 @@ public class CustomerController {
     @Path("/{id")
     public Response getById(@PathParam("id") Long id){
         try {
-            return Response.ok(customerService.mapToDTO(customerService.findById(id))).build();
+            return Response.ok(customerService.getById(id)).build();
         } catch (Exception e) {
             return  Response.serverError().build();
         }
