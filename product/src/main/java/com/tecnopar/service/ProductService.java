@@ -48,25 +48,6 @@ public class ProductService {
             productRepository.deleteById(id);
         }
     }
-    public ProductDTO mapToDTO(ProductEntity entity) {
-            ProductDTO dto = new ProductDTO();
-            dto.setCategory(entity.getCategory());
-            dto.setName(entity.getName());
-            dto.setModel(entity.getModel());
-            dto.setPrice(entity.getPrice());
-            dto.setDescription(entity.getDescription());
-            return dto;
-    }
-    public ProductEntity mapToEntity(ProductDTO dto){
-            ProductEntity ent = new ProductEntity();
-
-            ent.setCategory(dto.getCategory());
-            ent.setName(dto.getName());
-            ent.setPrice(dto.getPrice());
-            ent.setModel(dto.getModel());
-            ent.setDescription(dto.getDescription());
-            return  ent;
-    }
     public ProductDTO getById(Long id){
         return mapToDTO(findById(id));
     }
@@ -76,5 +57,24 @@ public class ProductService {
     private ProductEntity findById(Long id) {
         return (ProductEntity) productRepository.findByIdOptional(id)
                 .orElseThrow(ProductNotFoundException::new);
+    }
+    private ProductDTO mapToDTO(ProductEntity entity) {
+            ProductDTO dto = new ProductDTO();
+            dto.setCategory(entity.getCategory());
+            dto.setName(entity.getName());
+            dto.setModel(entity.getModel());
+            dto.setPrice(entity.getPrice());
+            dto.setDescription(entity.getDescription());
+            return dto;
+    }
+    private ProductEntity mapToEntity(ProductDTO dto){
+            ProductEntity ent = new ProductEntity();
+
+            ent.setCategory(dto.getCategory());
+            ent.setName(dto.getName());
+            ent.setPrice(dto.getPrice());
+            ent.setModel(dto.getModel());
+            ent.setDescription(dto.getDescription());
+            return  ent;
     }
 }
