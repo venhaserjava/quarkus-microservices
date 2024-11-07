@@ -1,11 +1,16 @@
 package com.tecnopar.service;
 
 import java.util.List;
+
+import org.eclipse.microprofile.rest.client.inject.RestClient;
+
 import java.util.ArrayList;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import com.tecnopar.client.CustomerClient;
+import com.tecnopar.client.ProductClient;
 import com.tecnopar.dto.BudgetDTO;
 import com.tecnopar.entity.BudgetEntity;
 import com.tecnopar.repository.BudgetRepository;
@@ -15,9 +20,16 @@ public class BudgetService {
 
     @Inject
     BudgetRepository budgetRepository;
-    
+
+    @Inject
+    @RestClient
+    private CustomerClient customerClient;
+
+    @Inject
+    @RestClient
+    private ProductClient productClient;
    
-    public List<BudgetDTO> findAll(){ 
+    public List<BudgetDTO> findAll(){   
         List<BudgetDTO> budgets = new ArrayList<>();
         budgetRepository.findAll()
             .stream()

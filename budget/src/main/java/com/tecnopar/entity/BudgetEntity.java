@@ -28,7 +28,7 @@ public class BudgetEntity {
 
     private String customerName;
 
-    private Long produtId;
+    private Long productId;
 
     private BigDecimal budgetValue;
 
