@@ -54,6 +54,7 @@ public class BudgetController {
             return Response.serverError().build();
         }
     }
+/*    
     @PUT
     @Path("/{id}")
     @Transactional
@@ -77,5 +78,5 @@ public class BudgetController {
             return Response.serverError().build();
         }
     }
-
+*/
 }

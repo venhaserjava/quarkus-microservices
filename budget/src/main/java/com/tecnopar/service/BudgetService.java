@@ -8,10 +8,12 @@ import java.util.ArrayList;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.NotFoundException;
 
 import com.tecnopar.client.CustomerClient;
 import com.tecnopar.client.ProductClient;
 import com.tecnopar.dto.BudgetDTO;
+import com.tecnopar.dto.CustomerDTO;
 import com.tecnopar.entity.BudgetEntity;
 import com.tecnopar.repository.BudgetRepository;
 
@@ -41,9 +43,18 @@ public class BudgetService {
     public BudgetDTO getById(Long id) { 
         return mapToDTO(findById(id));
     }
+
     public void create(BudgetDTO dto){
-        budgetRepository.persist(mapToEntity(dto));        
+        
+        CustomerDTO customerDTO = customerClient.getCustomerById(dto.getCustomerId());
+        if (customerDTO.getName().equals(dto.getCustomerName()) && productClient.getProductById(dto.getProductId())!= null
+        ){
+            budgetRepository.persist(mapToEntity(dto));            
+        } else {
+            throw new NotFoundException();
+        }        
     }
+
     public BudgetDTO update(Long id,BudgetDTO dto) {
         BudgetEntity budget = findById(id);
         if (budget.getId().equals(id)) {
@@ -69,7 +80,7 @@ public class BudgetService {
 
         dto.setCustomerId(ent.getCustomerId());
         dto.setCustomerName(ent.getCustomerName());
-        dto.setProdutId(ent.getProdutId());
+        dto.setProductId(ent.getProductId());
         dto.setBudgetValue(ent.getBudgetValue());
         return dto;
     }
@@ -78,7 +89,7 @@ public class BudgetService {
         ent.setBudgetValue(dto.getBudgetValue());
         ent.setCustomerId(dto.getCustomerId());
         ent.setCustomerName(dto.getCustomerName());
-        ent.setProdutId(dto.getProdutId());
+        ent.setProductId(dto.getProductId());
         return ent;
     }
     
