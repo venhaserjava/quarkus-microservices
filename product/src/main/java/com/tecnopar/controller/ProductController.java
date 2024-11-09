@@ -4,7 +4,14 @@ import com.tecnopar.dto.ProductDTO;
 import com.tecnopar.service.ProductService;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -33,6 +40,12 @@ public class ProductController {
             return  Response.serverError().build();
         }
     }
+    @GET
+    @Path("{id}")
+    public ProductDTO getProductById(@PathParam("id") Long id) {
+        return productService.getById(id);
+    }
+
     @POST
     @Transactional
     public  Response create(ProductDTO dto){
@@ -42,7 +55,6 @@ public class ProductController {
             return Response.serverError().build();
         }
     }
-
     @PUT
     @Transactional
     @Path("/{id}")

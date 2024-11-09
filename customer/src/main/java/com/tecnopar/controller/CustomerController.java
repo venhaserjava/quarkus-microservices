@@ -1,7 +1,6 @@
 package com.tecnopar.controller;
 
 import com.tecnopar.dto.CustomerDTO;
-import com.tecnopar.repository.CustomerRepository;
 import com.tecnopar.service.CustomerService;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -39,6 +38,13 @@ public class CustomerController {
             return  Response.serverError().build();
         }
     }
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public CustomerDTO getCustomerById(@PathParam("id") Long id) {
+        return customerService.getById(id);
+    }
+
     @POST
     @Transactional
     public Response create(CustomerDTO dto){

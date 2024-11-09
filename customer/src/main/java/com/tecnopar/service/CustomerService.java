@@ -6,8 +6,6 @@ import com.tecnopar.exception.CustomerNotFoundException;
 import com.tecnopar.repository.CustomerRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.core.NewCookie;
-
 import java.util.ArrayList;
 import java.util.List;
 
