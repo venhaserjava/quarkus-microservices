@@ -31,6 +31,7 @@ public class ProductController {
             return Response.serverError().build();
         }
     }
+    /*
     @GET
     @Path("/{id}")
     public Response getById(@PathParam("id") Long id){
@@ -40,10 +41,16 @@ public class ProductController {
             return  Response.serverError().build();
         }
     }
+    */
     @GET
     @Path("{id}")
-    public ProductDTO getProductById(@PathParam("id") Long id) {
-        return productService.getById(id);
+    public Response getProductById(@PathParam("id") Long id) {
+        try {
+            return Response.ok(productService.getById(id)).build();            
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
     }
 
     @POST

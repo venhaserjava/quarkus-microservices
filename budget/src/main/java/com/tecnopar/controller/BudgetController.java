@@ -1,22 +1,19 @@
 package com.tecnopar.controller;
 
-import com.tecnopar.dto.BudgetDTO;
-import com.tecnopar.service.BudgetService;
-
-import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
-import jakarta.ws.rs.Consumes;
-//import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
-//import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.PathParam;
+import com.tecnopar.dto.BudgetDTO;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.transaction.Transactional;
+import com.tecnopar.service.BudgetService;
 
-@Path("/api/budget")
+@Path("/api/budgets")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class BudgetController {
@@ -26,11 +23,11 @@ public class BudgetController {
 
     @GET
     public Response getAll() { 
+        
         try {
             return Response.ok(budgetService.findAll()).build();
-
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();            
             return Response.serverError().build();
         }
     }
@@ -51,7 +48,7 @@ public class BudgetController {
             budgetService.create(dto);
             return Response.ok().build();
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
             return Response.serverError().build();
         }
     }

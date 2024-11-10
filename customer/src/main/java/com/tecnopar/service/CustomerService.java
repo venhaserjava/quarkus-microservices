@@ -14,8 +14,7 @@ public class CustomerService {
 
     @Inject
     private CustomerRepository customerRepository;
-    private Long id;
-    private CustomerDTO dto;
+
 
     public List<CustomerDTO> findAll() {
         List<CustomerDTO> customers = new ArrayList<>();
@@ -31,8 +30,8 @@ public class CustomerService {
         return customer;
     }
     public CustomerDTO update(Long id, CustomerDTO dto) {
-        this.id = id;
-        this.dto = dto;
+        // this.id = id;
+        // this.dto = dto;
         var ent = findById(id);
         if (ent.getId().equals(id)) {
             ent.setAddress(dto.getAddress());
@@ -51,7 +50,9 @@ public class CustomerService {
         }
     }
     public CustomerDTO getById(Long id) {
-        return  mapToDTO(findById(id));
+        CustomerDTO dto = mapToDTO(findById(id));
+        dto.setId(id);
+        return dto;
     }
     ////////////////////////////////////////////////////////////////////////////////////
     // private methods
@@ -62,6 +63,7 @@ public class CustomerService {
     }
     private CustomerDTO mapToDTO(CustomerEntity ent){
         CustomerDTO dto = new CustomerDTO();
+        //dto.setId(ent.getId());
         dto.setAddress(ent.getAddress());
         dto.setAge(ent.getAge());
         dto.setName(ent.getName());

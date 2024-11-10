@@ -13,6 +13,7 @@ import jakarta.ws.rs.PathParam;
 @RegisterRestClient
 @ApplicationScoped
 public interface ProductClient {
+
     @GET
     @Path("/{id}")
     ProductDTO getProductById(@PathParam("{id}") Long id);

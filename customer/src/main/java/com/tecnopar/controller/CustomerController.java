@@ -29,6 +29,7 @@ public class CustomerController {
             return Response.serverError().build();
         }
     }
+    /*
     @GET
     @Path("/{id}")
     public Response getById(@PathParam("id") Long id){
@@ -38,6 +39,7 @@ public class CustomerController {
             return  Response.serverError().build();
         }
     }
+    */
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)

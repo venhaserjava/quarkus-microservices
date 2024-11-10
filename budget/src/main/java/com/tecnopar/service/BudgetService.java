@@ -21,7 +21,7 @@ import com.tecnopar.repository.BudgetRepository;
 public class BudgetService {
 
     @Inject
-    BudgetRepository budgetRepository;
+    private BudgetRepository budgetRepository;
 
     @Inject
     @RestClient
@@ -40,19 +40,21 @@ public class BudgetService {
             });
         return budgets;   
     }
+    
     public BudgetDTO getById(Long id) { 
         return mapToDTO(findById(id));
     }
 
     public void create(BudgetDTO dto){
-        
+
         CustomerDTO customerDTO = customerClient.getCustomerById(dto.getCustomerId());
-        if (customerDTO.getName().equals(dto.getCustomerName()) && productClient.getProductById(dto.getProductId())!= null
+        if (customerDTO.getName().equals(dto.getCustomerName()) 
+        && productClient.getProductById(dto.getProductId())!= null
         ){
             budgetRepository.persist(mapToEntity(dto));            
         } else {
             throw new NotFoundException();
-        }        
+        }                    
     }
 
     public BudgetDTO update(Long id,BudgetDTO dto) {

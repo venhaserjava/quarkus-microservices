@@ -8,13 +8,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
+//import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Builder
+//@Builder
 @Table(name="budget")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,7 +29,7 @@ public class BudgetEntity {
     private String customerName;
 
     private Long productId;
-
+    
     private BigDecimal budgetValue;
 
 }
