@@ -3,6 +3,7 @@ package com.tecnopar.controller;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.Produces;
@@ -22,8 +23,8 @@ public class BudgetController {
     BudgetService budgetService;
 
     @GET
-    public Response getAll() { 
-        
+//    @RolesAllowed({"user","admin"})
+    public Response getAll() {        
         try {
             return Response.ok(budgetService.findAll()).build();
         } catch (Exception e) {
