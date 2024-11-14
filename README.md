@@ -1,5 +1,5 @@
 # quarkus-microservices
-### na pasta do microserviço
+### na pasta do microservice
 cd customer
 ### Adicionar no Quarkus a extensão do Docker-compose ao pom.xml
 ./mvnw quarkus:add-extension -Dextensions="container-image-docker"

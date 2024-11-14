@@ -1,21 +1,58 @@
 ### este aruivo está versionado no git, por razões didáticas
 services:
-  app:
-    image: 'ubuntu/product:1.0.0-SNAPSHOT'
-    build: 
+  customer-app:
+    image: 'ubuntu/customer:1.0.0-SNAPSHOT'
+    build:
       context: .
-    container_name: app
+    container_name: customer-app
     depends_on:
       - db
     environment:
-      - QUARKUS_DATASOURCE_URL=jdbc:postgresql://db:5432/productdb
+      - QUARKUS_DATASOURCE_URL=jdbc:postgresql://db:5432/customer-db
       - QUARKUS_DATASOURCE_USERNAME=postgres
       - QUARKUS_DATASOURCE_PASSWORD=root_pwd
       - QUARKUS_JPA_HIBERNATE_DDL_AUTO=update
     ports:
-      - 8081:8081
+      - "8080:8080"
     networks:
       - dock-db-test
+
+
+  product-app:
+    image: 'ubuntu/product:1.0.0-SNAPSHOT'
+    build: 
+      context: .
+    container_name: product-app
+    depends_on:
+      - db
+    environment:
+      - QUARKUS_DATASOURCE_URL=jdbc:postgresql://db:5432/product-db
+      - QUARKUS_DATASOURCE_USERNAME=postgres
+      - QUARKUS_DATASOURCE_PASSWORD=root_pwd
+      - QUARKUS_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8081:8081"
+    networks:
+      - dock-db-test
+
+  budget-app:
+    image: 'ubuntu/budget:1.0.0-SNAPSHOT'
+    build:
+      context: .
+    container_name: budget-app
+    depends_on:
+      - db
+    environment:
+      - QUARKUS_DATASOURCE_URL=jdbc:postgresql://db:5432/budget-db
+      - QUARKUS_DATASOURCE_USERNAME=postgres
+      - QUARKUS_DATASOURCE_PASSWORD=root_pwd
+      - QUARKUS_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8082:8082"
+    networks:
+      - dock-db-test
+
+
   db:    
     image: 'postgres:13.1-alpine'
     container_name: db
