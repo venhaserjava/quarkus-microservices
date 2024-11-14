@@ -23,7 +23,7 @@ public class BudgetController {
     BudgetService budgetService;
 
     @GET
-//    @RolesAllowed({"user","admin"})
+//    @RolesAllowed({"user","admin"}) // disable keycloak Implamentation
     public Response getAll() {        
         try {
             return Response.ok(budgetService.findAll()).build();
